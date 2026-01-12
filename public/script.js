@@ -1,51 +1,78 @@
+const searchInput = document.getElementById("searchInput");
+const feed = document.getElementById("feed");
+const filterButtons = document.querySelectorAll(".filters button");
+
 let allResults = [];
-let currentSource = 'all';
+let currentSource = "all";
 
+/* SEARCH */
 async function runSearch() {
-    const query = document.getElementById('searchInput').value;
-    const resultsContainer = document.getElementById('results');
+    const query = searchInput.value.trim();
+    if (!query) return;
 
-    resultsContainer.innerHTML = '<p>Searching Africa’s markets...</p>';
+    feed.innerHTML = "<p>Loading results…</p>";
 
-    const response = await fetch(`/search?item=${query}`);
-    const result = await response.json();
+    try {
+        const response = await fetch(`/search?item=${encodeURIComponent(query)}`);
+        const data = await response.json();
 
-    allResults = result.data;
-    renderResults();
+        allResults = data.data || [];
+        renderFeed();
+    } catch {
+        feed.innerHTML = "<p>Failed to load results.</p>";
+    }
 }
 
-function filterSource(source) {
-    currentSource = source;
+/* RENDER */
+function renderFeed() {
+    feed.innerHTML = "";
 
-    document.querySelectorAll('.nav-tabs button').forEach(btn => {
-        btn.classList.remove('active');
-    });
-    event.target.classList.add('active');
-
-    renderResults();
-}
-
-function renderResults() {
-    const resultsContainer = document.getElementById('results');
-    resultsContainer.innerHTML = '';
-
-    const filtered = currentSource === 'all'
+    const filtered = currentSource === "all"
         ? allResults
         : allResults.filter(p => p.source === currentSource);
 
-    filtered.forEach(product => {
-        resultsContainer.innerHTML += `
-        <div class="card">
-            <img src="${product.image}" alt="${product.title}">
-            <div class="info">
-                <span class="badge ${product.source.toLowerCase()}">${product.source}</span>
-                <h3>${product.title}</h3>
-                <p class="price">₦${product.price.toLocaleString()}</p>
-                <a href="${product.link}" target="_blank">
-                    View on ${product.source}
-                </a>
+    if (filtered.length === 0) {
+        feed.innerHTML = "<p>No products found.</p>";
+        return;
+    }
+
+    filtered.forEach(p => {
+        const post = document.createElement("div");
+        post.className = "post";
+        post.style.backgroundImage = `url('${p.image}')`;
+
+        post.innerHTML = `
+            <div class="glass">
+                <div class="source">
+                    <i class="fa-solid fa-store"></i> ${p.source}
+                </div>
+                <div class="title">${p.title}</div>
+                <div class="price">₦${Number(p.price).toLocaleString()}</div>
+                <div class="actions">
+                    <a href="${p.link}" target="_blank">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i> View
+                    </a>
+                </div>
             </div>
-        </div>
         `;
+
+        feed.appendChild(post);
     });
 }
+
+/* FILTERS */
+filterButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+        filterButtons.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        currentSource = btn.dataset.source;
+        renderFeed();
+    });
+});
+
+/* EVENTS */
+searchInput.addEventListener("keydown", e => {
+    if (e.key === "Enter") runSearch();
+});
+
+window.onload = () => searchInput.focus();

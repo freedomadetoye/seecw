@@ -3,29 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SEECW - African E-commerce Search</title>
+
+    <title>SEECW — Product Search</title>
+    <meta name="description" content="Search and discover products across multiple e-commerce platforms in one modern feed.">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="SEECW — Product Search">
+    <meta property="og:description" content="Discover products from Jumia and Konga in one place.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://seecw.onrender.com">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-    <h1>SEECW 🌍</h1>
 
-   
+<div class="page">
 
-    <div class="search-box">
-        <input type="text" id="searchInput" placeholder="Search products...">
-        <button onclick="runSearch()">Search</button>
-    </div>
-        
-         <nav class="nav-tabs">
-        <button onclick="filterSource('all')" class="active">All</button>
-        <button onclick="filterSource('Jumia')">Jumia</button>
-        <button onclick="filterSource('Konga')">Konga</button>
+    <!-- SEARCH AREA -->
+    <header class="search-header">
+        <div class="logo">SEECW</div>
+
+        <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search products"
+                autocomplete="off"
+            >
+        </div>
+    </header>
+
+    <!-- FILTERS -->
+    <nav class="filters">
+        <button class="active" data-source="all">
+            <i class="fa-solid fa-layer-group"></i> All
+        </button>
+        <button data-source="Jumia">
+            <i class="fa-solid fa-store"></i> Jumia
+        </button>
+        <button data-source="Konga">
+            <i class="fa-solid fa-bag-shopping"></i> Konga
+        </button>
     </nav>
-</header>
 
-<main id="results"></main>
+    <!-- FEED -->
+    <main id="feed" class="feed"></main>
 
-    <script src="script.js"></script>
+    <!-- FOOTER -->
+    <footer class="footer">
+        © 2026 SEECW — Discover products smarter
+    </footer>
+
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
