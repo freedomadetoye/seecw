@@ -1,23 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Basic -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>SEECW — Product Search</title>
-    <meta name="description" content="Search and discover products across multiple e-commerce platforms in one modern feed.">
+    <!-- Primary SEO -->
+    <title>SEECW  -  Search Engine for E-commerce Websites</title>
+    <meta name="description" content="SEECW is a modern search engine that helps you find and compare products across multiple e-commerce websites like Jumia and Konga in one place.">
+    <meta name="keywords" content="ecommerce search engine, product search, price comparison Nigeria, Jumia search, Konga search, online shopping Nigeria">
+    <meta name="author" content="SEECW">
+    <meta name="robots" content="index, follow">
 
-    <!-- Open Graph -->
-    <meta property="og:title" content="SEECW — Product Search">
-    <meta property="og:description" content="Discover products from Jumia and Konga in one place.">
+    <!-- Canonical -->
+    <link rel="canonical" href="https://seecw.onrender.com/">
+
+    <!-- Open Graph (Facebook, WhatsApp, LinkedIn) -->
+    <meta property="og:title" content="SEECW  -  Search Engine for E-commerce Websites">
+    <meta property="og:description" content="Search and discover products from multiple e-commerce platforms in one clean, modern feed. Compare prices and shop smarter.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://seecw.onrender.com">
+    <meta property="og:url" content="https://seecw.onrender.com/">
+    <meta property="og:image" content="https://seecw.onrender.com/assets/images/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="SEECW">
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="SEECW  -  Search Engine for E-commerce Websites">
+    <meta name="twitter:description" content="Find products across Jumia, Konga, and more — all in one place.">
+    <meta name="twitter:image" content="https://seecw.onrender.com/assets/images/og-image.png">
+
+    <!-- Theme / UX -->
+    <meta name="theme-color" content="#1ecad3">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
 
     <!-- Icons -->
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+
+    <!-- Icons Library -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
+    <!-- Styles -->
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
 <div class="page">
@@ -31,14 +59,15 @@
             <input
                 type="text"
                 id="searchInput"
-                placeholder="Search products"
+                placeholder="Search products across e-commerce sites"
                 autocomplete="off"
+                aria-label="Search products"
             >
         </div>
     </header>
 
     <!-- FILTERS -->
-    <nav class="filters">
+    <nav class="filters" aria-label="Product sources">
         <button class="active" data-source="all">
             <i class="fa-solid fa-layer-group"></i> All
         </button>
@@ -51,11 +80,11 @@
     </nav>
 
     <!-- FEED -->
-    <main id="feed" class="feed"></main>
+    <main id="feed" class="feed" aria-live="polite"></main>
 
     <!-- FOOTER -->
     <footer class="footer">
-        © 2026 SEECW — Discover products smarter
+        © 2026 SEECW · Search Engine for E-commerce Websites
     </footer>
 
 </div>
