@@ -12,7 +12,7 @@ async function runSearch() {
     feed.innerHTML = "<p>Loading results…</p>";
 
     try {
-        const response = await fetch(`https://seecw.onrender.com/search?item=${encodeURIComponent(query)}`);
+        const response = await fetch(`/search?item=${encodeURIComponent(query)}`);
         const data = await response.json();
 
         allResults = Array.isArray(data.data) ? data.data : [];
