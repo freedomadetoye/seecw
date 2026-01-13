@@ -5,7 +5,6 @@ const filterButtons = document.querySelectorAll(".filters button");
 let allResults = [];
 let currentSource = "all";
 
-/* SEARCH */
 async function runSearch() {
     const query = searchInput.value.trim();
     if (!query) return;
@@ -13,17 +12,16 @@ async function runSearch() {
     feed.innerHTML = "<p>Loading results…</p>";
 
     try {
-        const response = await fetch(`/search?item=${encodeURIComponent(query)}`);
+        const response = await fetch(`https://seecw.onrender.com/search?item=${encodeURIComponent(query)}`);
         const data = await response.json();
 
-        allResults = data.data || [];
+        allResults = Array.isArray(data.data) ? data.data : [];
         renderFeed();
-    } catch {
+    } catch (err) {
         feed.innerHTML = "<p>Failed to load results.</p>";
     }
 }
 
-/* RENDER */
 function renderFeed() {
     feed.innerHTML = "";
 
@@ -39,18 +37,21 @@ function renderFeed() {
     filtered.forEach(p => {
         const post = document.createElement("div");
         post.className = "post";
-        post.style.backgroundImage = `url('${p.image}')`;
 
         post.innerHTML = `
-            <div class="glass">
+            <div class="post-inner">
                 <div class="source">
                     <i class="fa-solid fa-store"></i> ${p.source}
                 </div>
-                <div class="title">${p.title}</div>
-                <div class="price">₦${Number(p.price).toLocaleString()}</div>
+
+                <img src="${p.image || ''}" alt="${p.title || 'Product image'}">
+
+                <div class="title">${p.title || 'Untitled product'}</div>
+                <div class="price">₦${Number(p.price || 0).toLocaleString()}</div>
+
                 <div class="actions">
                     <a href="${p.link}" target="_blank">
-                        <i class="fa-solid fa-arrow-up-right-from-square"></i> View
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i> View product
                     </a>
                 </div>
             </div>
