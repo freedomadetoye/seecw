@@ -64,7 +64,7 @@ async function scrapeKonga(item) {
                     products.push({
                         title: item.name,
                         price: rawPrice,
-                        link: `https://www.konga.com/product/${item.url_key}`,
+                        link: `https://www.konga.com/product/${item.url_key}?k_id=@freedom6551`,
                         image: `https://www-konga-com-res.cloudinary.com/image/upload/f_auto,fl_lossy,dpr_auto,q_auto,w_1080/media/catalog/product${item.image_thumbnail_path}`,
                         source: 'Konga'
                     });
