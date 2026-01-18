@@ -6,7 +6,6 @@ const PORT = process.env.PORT || 3000;
 // Serve the frontend files from the 'public' folder
 app.use(express.static('public'));
 
-
 app.get('/search', async (req, res) => {
     const query = req.query.item;
 
@@ -27,7 +26,6 @@ app.get('/search', async (req, res) => {
 });
 
 
-
 app.listen(PORT, () => {
-    console.log(`🚀 SEECW is live at http://localhost:${PORT}`);
+    console.log(`SEECW is live at http://localhost:${PORT}`);
 });
